@@ -18,6 +18,7 @@ export default function Login() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const keyboardVerticalOffset = Platform.OS === "ios" ? 80 : 0;
 
+  // declaring types
   enum signInType {
     Phone,
     Email,
@@ -25,6 +26,13 @@ export default function Login() {
     Apple,
   }
 
+  /**
+   * logic for phone number verification
+   * we're using clerk client
+   * 
+   * @param type: strings object 
+   */
+  
   const onSignIn = async (type:  signInType) => {
      if (type === signInType.Phone) {
 
@@ -82,7 +90,8 @@ export default function Login() {
           <Text style={defaultStyles.buttonText}>Continue</Text>
         </TouchableOpacity>
 
-
+           {/**
+            * 1. the hairline width is for a tiny line diff for separation */ }
 
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
           <View
@@ -94,7 +103,7 @@ export default function Login() {
           />
         </View>
 
-        
+          {/* {===========================  for Login Screen clerk Options  =============================} */}
         <TouchableOpacity
           onPress={() => onSignIn(signInType.Email)}
           style={[
