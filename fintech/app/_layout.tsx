@@ -1,7 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Colors from "@/constants/Colors";
 import { useFonts } from "expo-font";
-import { Link, Stack, router, useRouter } from "expo-router";
+import { Link, Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { TouchableOpacity } from "react-native";
