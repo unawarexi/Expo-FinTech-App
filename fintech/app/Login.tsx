@@ -11,22 +11,25 @@ import Colors from "@/constants/Colors";
 import { defaultStyles } from "@/constants/Styles";
 import React, { useState } from "react";
 import { Link } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Login() {
   const [countryCode, setCountryCode] = useState("+49");
   const [phoneNumber, setPhoneNumber] = useState("");
   const keyboardVerticalOffset = Platform.OS === "ios" ? 80 : 0;
-  const onSignUp = async () => {
-    // const fullPhoneNumber = `${countryCode}${phoneNumber}`;
-    // try {
-    //   await signUp!.create({
-    //     phoneNumber: fullPhoneNumber,
-    //   });
-    //   signUp!.preparePhoneNumberVerification();
-    //   router.push({ pathname: '/verify/[phone]', params: { phone: fullPhoneNumber } });
-    // } catch (error) {
-    //   console.error('Error signing up:', error);
-    // }
+
+  enum signInType {
+    Phone,
+    Email,
+    Google,
+    Apple,
+  }
+
+  const onSignIn = async (type:  signInType) => {
+     if (type === signInType.Phone) {
+
+     }
+   
   };
 
   return (
@@ -38,7 +41,7 @@ export default function Login() {
       <View style={defaultStyles.container}>
         <Text style={defaultStyles.header}>Welcome back !</Text>
         <Text style={defaultStyles.descriptionText}>
-          Enter your phone number. We will send you a confirmation code there
+          Enter the phone number associated with your account
         </Text>
         <View style={styles.inputContainer}>
           <TextInput
@@ -65,7 +68,7 @@ export default function Login() {
           </TouchableOpacity>
         </Link>
 
-        <View style={{ flex: 1 }} />
+       
 
         {/* {===========================  for signUp button =============================} */}
         <TouchableOpacity
@@ -74,10 +77,71 @@ export default function Login() {
             phoneNumber !== "" ? styles.enabled : styles.disabled,
             { marginBottom: 20 },
           ]}
-          onPress={onSignUp}
+          onPress={(() => onSignIn(signInType.Phone))}
         >
-          <Text style={defaultStyles.buttonText}> Sign In</Text>
+          <Text style={defaultStyles.buttonText}>Continue</Text>
         </TouchableOpacity>
+
+
+
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+          <View
+            style={{ flex: 1, height: StyleSheet.hairlineWidth, backgroundColor: Colors.gray }}
+          />
+          <Text style={{ color: Colors.gray, fontSize: 20 }}>or</Text>
+          <View
+            style={{ flex: 1, height: StyleSheet.hairlineWidth, backgroundColor: Colors.gray }}
+          />
+        </View>
+
+        
+        <TouchableOpacity
+          onPress={() => onSignIn(signInType.Email)}
+          style={[
+            defaultStyles.pillButton,
+            {
+              flexDirection: 'row',
+              gap: 16,
+              marginTop: 20,
+              backgroundColor: '#fff',
+            },
+          ]}>
+          <Ionicons name="mail" size={24} color={'#000'} />
+          <Text style={[defaultStyles.buttonText, { color: '#000' }]}>Continue with email </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => onSignIn(signInType.Google)}
+          style={[
+            defaultStyles.pillButton,
+            {
+              flexDirection: 'row',
+              gap: 16,
+              marginTop: 20,
+              backgroundColor: '#fff',
+            },
+          ]}>
+          <Ionicons name="logo-google" size={24} color={'#000'} />
+          <Text style={[defaultStyles.buttonText, { color: '#000' }]}>Continue with Google </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => onSignIn(signInType.Apple)}
+          style={[
+            defaultStyles.pillButton,
+            {
+              flexDirection: 'row',
+              gap: 16,
+              marginTop: 20,
+              backgroundColor: '#fff',
+            },
+          ]}>
+          <Ionicons name="logo-apple" size={24} color={'#000'} />
+          <Text style={[defaultStyles.buttonText, { color: '#000' }]}>Continue with Apple-ID </Text>
+        </TouchableOpacity>
+
+
+
       </View>
     </KeyboardAvoidingView>
   );
